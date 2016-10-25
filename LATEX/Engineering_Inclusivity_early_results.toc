@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Stress-testing the Kim model}{1}{section.1}
+\contentsline {section}{\numberline {2}Model objectives}{3}{section.2}
+\contentsline {section}{\numberline {3}Where shall we take the paper?}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Model core: the policies}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Stress-testing the Kim model (redux)}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Exploring parameter space}{6}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Computational load}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Questions}{7}{subsection.3.5}

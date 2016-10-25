@@ -1,0 +1,32 @@
+\section{Introduction}
+
+Online communities are used to aggregate and process information dispersed across many individuals. Pioneered in the 1980s, they have become more widespread with mass adoption of the Internet, and are now used across many different contexts in business \cite{mcwilliam2012building, tapscott2008wikinomics}, politics and public decision making \cite{rheingold1993virtual, noveck2009wiki, cottica2010wikicrazia}, expertise sharing \cite{rheingold1993virtual, zhang2007expertise, shirky2008here}, and education \cite{milligan2013patterns}. At the same time as they spread across domains, they did so geographically: for example, they have attracted large numbers of users and large venture capital investments in China \cite{zhou2011social}. Most online communities lack a central command structure; despite this, many display remarkably coherent behaviour, and have proven effective at large tasks like writing the largest encyclopedia in human history (Wikipedia), providing an always-on free helpline for software engineering problems (StackOverflow), or building, and continuously updating, a detailed map of planet Earth (OpenStreetMap) \cite{shirky2008here}. 
+
+Organizations running online communities typically employ community managers, tasked with encouraging participation and resolving conflict: this practice is almost as old as online communities themselves and predates the Internet \cite{rheingold1993virtual}, although it has become much more widespread as Internet access became a mass phenomenon. Though most participants to online communities are unpaid and answer to no one, a small number of them (only one or two in the smaller communities, many more in the larger ones) report to a central command, and carry out its directives. Following the convention of practitioners themselves, we shall henceforth call such directives \emph{policies}. 
+
+Putting in place policies for online communities is costly. Professional community managers need to be recruited, trained and paid; software tools to monitor communities and make their work possible need to be developed and maintained. This raises the question of what benefits organisations running online communities expect from policies; and why they choose certain policies, and not others. 
+
+A full investigation of this matter is outside the scope of this paper; however, in what follows we outline and briefly discuss the set of assumptions that underpin our investigation. 
+
+\begin{enumerate}
+\item In line with the network science approach to online communities, we model online communities as social networks of interactions across participants. 
+\item We assume that organisations can be modelled as economic agents maximising some objective function. The target variable being maximised can be profit (for online communities run by commercial companies); or welfare (for online communities run by governments or other nonprofit entities); or some combination of the two. 
+\item We assume that the topology of the interaction network characteristic of online communities affects their ability to contribute to the maximisation of the target variable. 
+\item We assume that such organisations choose their policies as follows: 
+\begin{itemize} 
+	\item Solve their maximisation problem over network topology. This yields a vector of desired network characteristics, where "desired" means that those characteristics define a maximum of the objective function. These solutions will be statements with the form "In order to best meet our ultimate [profit or welfare] goals, the interaction network in our online community should be in state $\Theta_D$, where $\Theta$ is a vector of topology-related parameters".
+	\item Derive a course of action that community managers could take to change the network away from its present state $\Theta_0$ to the desired state $\Theta_D$.
+	\item Encode such course of action in a set of simple instructions for community managers to execute. They call them policies; computer scientists might think of such instructions as algorithms; economists call them mechanisms. 
+\end{itemize}
+\end{enumerate}
+
+ All this is predicated on the notion that community managers, though they cannot control the members' behaviour directly, can nevertheless influence what they do, and use their influence to further the goals of the principal. In a previous work (\cite{cottica2016microfoundations}), we have found evidence that, indeed, users become more active after community managers have reached out to them.
+ 
+In this paper, we model two widely spread policies for online community management. We aim to evaluate their effectiveness at producing a "better" community, in terms of the principal organisation that runs it. We assume that the principal organisation has four measurable goals:
+
+\begin{enumerate}
+	\item \textit{Liveliness}. All other things being equal, online communities tend to be more valuable the higher their output. Activity is directly beneficial (for example in citizen science) or signals commitment to the organisation (for example in online communities related to commercial products). 
+	\item  \textit{Diversity}. Online communities were only one or few voices are heard are likely to be less valuable than those with a diverse participation.  the inequality of the distribution between the number of communication events initiated by each member. 
+	\item \textit{Social capital}: the sum total of the membership strength of each individual member.
+	\item \textit{Inclusivity}: the inequality of the distribution of membership strength across the community.
+\end{enumerate}

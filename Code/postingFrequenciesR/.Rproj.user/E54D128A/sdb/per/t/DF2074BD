@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library (jsonlite)\nnetFileName <- '/Users/albertocottica/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper 3 Data/json/data/2015-11-02-14-08-26/edgesWIntervals.json'\nedgesFile <- fromJSON(netFileName)\nh <-hist(edgesFile$interval, col='lightblue')\nplot (h, log = 'xy', main = \"Interval between two consecutive comments\")\n",
+    "created" : 1463069235533.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3386481463",
+    "id" : "DF2074BD",
+    "lastKnownWriteTime" : 1463395740,
+    "last_content_update" : 1463395740880,
+    "path" : "~/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper3 Code/postingFrequenciesR/newFrequencies.R",
+    "project_path" : "newFrequencies.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

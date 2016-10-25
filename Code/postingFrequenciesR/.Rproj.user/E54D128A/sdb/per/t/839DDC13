@@ -1,0 +1,28 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1463237222305.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "839DDC13",
+    "lastKnownWriteTime" : 4318411840,
+    "last_content_update" : 1463237222305,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "tnk24ceg7c",
+        "caption" : "edgesFile",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=edgesFile&cache_key=tnk24ceg7c",
+        "displayedObservations" : 17328,
+        "environment" : "",
+        "object" : "edgesFile",
+        "totalObservations" : 17328,
+        "variables" : 7
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

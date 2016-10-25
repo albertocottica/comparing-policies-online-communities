@@ -1,0 +1,102 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/albertocottica/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper 3 Data/Stata/Comparing_policies.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}12 Aug 2016, 11:32:35
+
+{com}. clear
+
+. use "/Users/albertocottica/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper 3 Data/Stata/allPolicies_tracking_2founders_C0.05_beta10.dta"
+
+. separate s, by onboard
+{err}option by() required
+{txt}{search r(198):r(198);}
+
+{com}. separate s, by (onboard)
+
+              {txt}storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:s1             }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}s, onboard == False{p_end}
+{p 0 48}{bind:s2             }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}s, onboard == True{p_end}
+
+{com}. separate s1, by (engage)
+
+              {txt}storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:s11            }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}s1, engage == False{p_end}
+{p 0 48}{bind:s12            }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}s1, engage == True{p_end}
+
+{com}. separate s2, by (engage)
+
+              {txt}storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:s21            }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}s2, engage == False{p_end}
+{p 0 48}{bind:s22            }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}s2, engage == True{p_end}
+
+{com}. sum s11
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 9}s11 {c |}{res}     14000    7.935442    2.955292          0   18.39053
+
+{com}. sum s11 s12 s21 s22
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 9}s11 {c |}{res}     14000    7.935442    2.955292          0   18.39053
+{txt}{space 9}s12 {c |}{res}     14000    15.92998    5.518921          0   32.82426
+{txt}{space 9}s21 {c |}{res}     14000    7.933822    2.944489          0   17.90563
+{txt}{space 9}s22 {c |}{res}     14000    15.87389    5.520219          0   45.23677
+
+{com}. log off
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/albertocottica/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper 3 Data/Stata/Comparing_policies.smcl
+  {txt}log type:  {res}smcl
+ {txt}paused on:  {res}12 Aug 2016, 11:40:00
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/albertocottica/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper 3 Data/Stata/Comparing_policies.smcl
+  {txt}log type:  {res}smcl
+{txt}resumed on:  {res}12 Aug 2016, 11:41:31
+
+{com}. inequal7 s11 s12 s21 s22
+{txt}Warning: s11 has 229 values == 0 *used* in calculations
+    (except for SD logs, GE(-1), GE(0) (Mean log-deviation) and GE(1) (Theil)).
+Warning: s12 has 133 values == 0 *used* in calculations
+    (except for SD logs, GE(-1), GE(0) (Mean log-deviation) and GE(1) (Theil)).
+Warning: s21 has 217 values == 0 *used* in calculations
+    (except for SD logs, GE(-1), GE(0) (Mean log-deviation) and GE(1) (Theil)).
+Warning: s22 has 131 values == 0 *used* in calculations
+    (except for SD logs, GE(-1), GE(0) (Mean log-deviation) and GE(1) (Theil)).
+
+{hline 41}{c TT}{hline 47}
+                     Inequality measures {c |}        s11         s12         s21         s22
+{hline 41}{c +}{hline 47}
+                 Relative mean deviation {c |}    {res}0.14413     0.13275     0.14398     0.13304
+                {txt}Coefficient of variation {c |}    {res}0.37242     0.34645     0.37113     0.34775
+              {txt}Standard deviation of logs {c |}    {res}0.47749     0.50007     0.48213     0.50553
+                        {txt}Gini coefficient {c |}    {res}0.20725     0.19102     0.20646     0.19155
+                          {txt}Mehran measure {c |}    {res}0.31842     0.29735     0.31794     0.29790
+                          {txt}Piesch measure {c |}    {res}0.15167     0.13786     0.15072     0.13838
+                         {txt}Kakwani measure {c |}    {res}0.04805     0.04259     0.04786     0.04282
+              {txt}Theil index (GE(a), a = 1) {c |}    {res}0.06728     0.06373     0.06765     0.06434
+       {txt}Mean Log Deviation (GE(a), a = 0) {c |}    {res}0.08685     0.08826     0.08798     0.08959
+           {txt}Entropy index (GE(a), a = -1) {c |}    {res}0.14344     0.17396     0.14693     0.17994
+{txt}Half (Coeff.Var. squared) (GE(a), a = 2) {c |}    {res}0.06934     0.06001     0.06886     0.06046
+{txt}{hline 41}{c BT}{hline 47}
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/albertocottica/Documents/More PhD stuff/MyPhDdata/Thesis Paper 3/Paper 3 Data/Stata/Comparing_policies.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}12 Aug 2016, 11:44:43
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

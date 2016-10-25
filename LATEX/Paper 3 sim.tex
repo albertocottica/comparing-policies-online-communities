@@ -1,0 +1,140 @@
+\title{Engineering inclusivity in online conversations}
+\author{Alberto Cottica}
+\date{\today}
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{mathtools}
+\graphicspath{ {./Paper3Images/} }
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+
+In their paper "Group Intimacy and Network Formation", Kim, Jo and Kim observe that some online communities display a bizarre behaviour: they are open to new entrants, yet new entrants can never quite become full participants in the way that the founders are. They try to account for this by building a simulation model. This is intriguing in terms of the thesis, because the inclusivity towards new entrants is a key concern of real-world online communities. 
+
+We propose to extend and improve on their results in three ways. First, we consider the same issue from the perspective of the entity (company or public sector agency) which created the online community. Inclusivity maps to user engagement and community growth, which is seen as desirable in most real-life cases. We consider the decision to enact community management policies to this effect. Second, we assume that each user's behaviour is dependent on the behaviour of other users in ways that account for the "bursty" nature of human communication. Third, we assume a growth model more coherent with empirical data and the literature on evolving networks.
+
+\section{Main engine and results of Kim-Jo-Kim}
+
+The idea behind the model is this. There is something called intimacy, ($W$). Intimacy is pairwise, directed and time-dependent: $W_{ij}(t_n) \neq W_{ji}(t_n)$. That makes it a social network. It is built by interaction, and, in turn, it influences interaction. The probability that $i$ communicates with $j$ at time $t_n$ depends on $W_{ij}(t_n)$ and $W_{ji}(t_n)$. If communication does occur, intimacy is increased. If it does not, intimacy is assumed to decay as time passes.
+
+Time is discrete (but, oddly, discounting is continuous). Time intervals are chosen in such a way that the number of communication events going out from users in each period is "on average" 1\footnote {In the words of the authors: \quote{In comparison with the real online community, our choice of the normalization implies that the time interval $\Delta t$ needs to be sufficiently small, which corresponds to the average time between consecutive communication events, i.e., intercommunication time.} I am noting this because "bursty" real-world online interaction might mean that the time interval needs to be short indeed, maybe 30 minutes over a dataset spanning years. This might result in cumbersome computation and periods full of zero. Also, I don't understand what they mean by "on average". Average across all users in the period?}. The probability of a communication event is governed by the following equation:
+
+\begin{equation}
+ 	P [\Phi_{ij}(t_n) = 1] = \frac{1 + \beta W_{ij}t_{n-1} W_{ji}t_{n-1}}{\sum_j 1 + \beta W_{ij}t_{n-1} W_{ji}t}
+	\label{eq:mainEngine}
+ \end {equation}
+
+The choice of who users communicate with is, in the model, a random choice according to a uniform distribution, influenced by the intimacy felt with each of the other users. The $\beta$ parameter represents intimacy strength: when it is set to 0, users communicate at random. The higher it gets, the more "conservative" users get in communicating almost always with people they are most intimate with. 
+
+Once communication has happened, intimacy values are updated. 
+
+\begin{equation}
+	W_{ij}(t_n) = W_{ij}(t_{n-1})e^{-\frac{\Delta t}{\tau}} + \Phi_{ij}(t_n)
+\end{equation}
+
+Let's call "conservative" an online community where people tend to interact more with close friends. The model implies that:
+
+\begin{itemize}
+	\item A higher $\beta$ implies a more conservative community. 
+	\item A lower time discount rate $\tau$ implies a more conservative community. Previous intimacy is forgotten faster; the absolute values of the $W$s in equation \ref{eq:mainEngine} decreases; choice is shifted towards randomness.
+	\item A longer time interval $\Delta t$ implies a more conservative community, because equation \ref{eq:mainEngine} only looks back one time period. Conversely, a lower frequency of communication events (which is the reciprocal of $\Delta t$) also implies 
+\end{itemize}
+
+The paper proceeds to simulate the growth of networks according to the model, attributing values to the parameters. It has two main results:
+
+\begin{enumerate}
+	\item When the intimacy strength parameter $\beta$ is low, the intimacy networks are connected. Early users to not dominate. New ones do not leave. The size of the giant component approximates that of the whole network. When $\beta$ is high, the opposite occurs. 
+	\item The size of the giant component exhibits a phase transition for $\beta \approx 3.5$. The phase transition manifests itself in two ways. The first: as $\beta$ increases, the size of the giant component in the network decreases sharply. The second: as the model is run multiple times, the standard deviation of the size of the giant component peaks around that value for all network sizes, and increases in network size. 
+\end{enumerate}
+
+\section{Choosing a policy}
+
+The Kim-Jo-Kim framework lends itself to be evaluated in terms of a (scalar) participation indicator. The rate at which new users join is an exogenous parameter, but disengagement is endogenous to the model. All other things being equal, a community in which fewer people disengage is one with a higher rate of growth of active users. Growth is one of the objectives of most online communities. This is a strong intuition at this stage. It could be validated by a survey among professional online community managers, asking them on which indicators senior management evaluates a community manager. So, the story behind the paper could be this. A company or government agency runs an online community. It considers two alternatives: no intervention and deployment of community managers. For a given level of cost of the policy, its decision will depend on the increase in participation it buys. This, in turn, will vary in parameter space. 
+
+\section{Modelling agents}
+
+We model two kinds of agents where Kim-Jo-Kim only model one. 
+
+\begin{itemize}
+	\item Like in Kim-Jo-Kim, ordinary users engage in communication events depending on a network of intimacy ties: 
+	\begin{equation}
+	P [\Phi_{ij}(t_n) = 1] = f(W_{ij}), f')W{ij} > 0
+	\end {equation}
+	Unlike in Kim-Jo-Kim, the probability of users to be active at any time period depends on the number of communications received in the previous period. 
+	\item We consider a second type of users: online community managers, who set themselves the goal of higher inclusivity. Their probability to engage in interactions with others does not depend on intimacy. Rather, it is finalised to achieving exogenous goals in terms of participation and user experience. Roughly, this requires targeting new users, or users with fewer and weaker incoming ties. Additionally, we can rely on the second paper to assume that ordinary users are more responsive to communications from community managers than to ones from other ordinary users.
+\end{itemize}
+
+\section{Hypotheses and how to test for them}
+
+The modified Kim-Jo-Kim model can be then used to test the following hypotheses.
+
+\newtheorem{intimacy}{Hypothesis}
+
+\begin{intimacy}
+	The stronger intimacy effects in an online community, the more conservative the community, and the slower its growth.
+	\label{hypothesis:KJK}
+\end{intimacy}
+	
+Hypothesis \ref{hypothesis:KJK} is Kim-Jo-Kim's main result. We verify that it still applies to our variant of the model. 
+
+To disprove it:
+
+\begin{enumerate}
+	\item Take the average participation over a number of runs of the model, for different values of the intimacy strength parameter.
+	\item Run a test on the null hypothesis that:
+	\begin{equation}
+		H_0: \theta(\beta_{high}) < \theta (\beta_{low})
+	\end{equation}
+	\item Explore parameter space. 
+\end{enumerate}
+
+$\phi(\beta )$ is an indicator of participation. A decision needs to be made on which one to use, since the one used by Kim-Jo-Kim has some limitations \footnote{In the Kim-Jo-Kim model, users aggregate the (time-discounted) incoming communications they received into an indicator called "membership strength" ($S$). When $S$ falls under an exogenously given threshold $\bar{S}$, the user removes herself from the community. This method has the advantage of directly linking cliquish behaviour of incumbent users to community growth: exclusionary communities grow only very slowly, because most new members do not manage to make enough friends and leave. In real life, however, users of online communities almost never delete their accounts. A possible alternative is to compare the distribution of membership strength across all users. Low intimacy strength should be associated with a more equal distribution. Gini coefficients may be used to measure equality. Another one is to look at the distribution by age of user's last communication event: not having contributed in a long time is a form of having left. Low intimacy strength should be associated, again, with more equal distribution.}. 
+	
+\begin{intimacy}
+	Introducing online community management mitigates or neutralises the effect of strong intimacy. 
+	\label{hypothesis:introcms}
+\end{intimacy}
+
+This attempts to account for the existence of online community managers. If their presence induces a more inclusive community and, therefore, a faster growth, there is an argument for paying their salary. 
+
+To disprove it:
+
+\begin{enumerate}
+	\item Take the average participation over a number of runs of the model, with online community managers and without.
+	\item Run a test on the null hypothesis that:
+	\begin{equation}
+		H_0: \theta(noCM) < \theta (CM)
+	\end{equation}
+	\item Explore parameter space. 
+\end{enumerate}
+
+Notice that parameter space, in this case, includes the proportion of users that are online community managers.
+
+\section{Two quirks: leaving the network and the treatment of time}
+
+This section deals with two aspects of the paper by Kim and collaborators which I think are not fundamental to their results. As far as they are concerned, we can depart from the original paper.
+
+The first aspect concerns to the assumption that users can and do "leave the network". They do so when their incoming intimacy is "too low". A threshold parameter is set exogenously to regulate this. The advantage of such a choice is that the authors can then study the effect of the value of $\beta$ on network topology. They go on to show that the network becomes more sparse as $\beta$ increases.
+
+I think this choice is not fundamental. Like us, the authors are interested in the social attribute of "being fully included in the online community". In terms of the model, this can be approximated by incoming intimacy, i.e. weighted in-degree in the intimacy network, denoted in the paper by $S$ (for "membership strength"). The authors themselves use this approach. Removal from the network is represented by setting $S$ to zero when it drops below the threshold value. They could as well have ignored thresholds and looked at the distribution of $S$ across users as a proxy of community inclusivity. 
+
+I advocate doing so, both for elegance reasons and because I question the metaphor. "Leaving" seems like an active choice to say farewell: this is very rare in real-world online communities, where users tend to become inactive gradually, until their perfectly valid accounts sit completely still. The only real-world online communities where the number of accounts decreases are those where the organisations running them have a policy of terminating inactive accounts after a certain time (Pardus), or if they fail to pay fees (World of Warcraft). 
+
+The second aspect concerns the treatment of time. In the paper time is discrete. Periods have length $\Delta t$ (normalized to 1 in the computer simulation). At each time period, each user "rolls the dice" and chooses someone to interact with\footnote{This description is not quite precise. The authors say that: \quote{ In our model, it is assumed that the number of communications one member can make with others is one on average, i.e. $\sum_j P[\Phi_{ij} (t_n)] = 1$ .} }. However, decay of intimacy over time is continuous. In the computer model, the parameter $\tau$, representing the time scale of decay, is measured in units of $\Delta t$, and set to 100 units.  
+ 
+
+\section{Initialization}
+
+A final note concerning not so much the paper I would like to write, but the one by Kim and collaborators. Their simulations make an initialization hypothesis that might influence their results more than is usually the case. They start with a network of 150 members, all connected to each other. Alòl edges have strength 0.1. This means that all "founders" have incoming intimacy of $149 x 0.1 = 14.9$ at the start. Each simulation runs for 800 time steps; a new member is added every four time steps, so that network size at $t = 800$ is 350. 
+
+For high values of $\beta$, they find that the community splits almost exactly into two: all but about 20 of the "founders" are still connected, and some have achieved "dominance". The great majority of nodes added afterwards have removed themselves from the network. About 30 are still active. None that joined after $t = 100$ has achieved "dominance" (figure 2c). There is the possibility that the peculiar initialization (a 150-clique, almost never observed in the real world) exacerbates the dynamics excluding new users, because the founders already have many people to talk to. 
+
+\end{document}
